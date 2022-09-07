@@ -11,6 +11,12 @@ class MerchSiteControl extends React.Component {
     };
   }
 
+  handleClick = () => {
+    this.setState((prevState) => ({
+      formVisible: !prevState.formVisible,
+    }));
+  };
+
   render() {
     let curVisibleState = null;
     let buttonText = null;
@@ -23,7 +29,8 @@ class MerchSiteControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {curVisibleState};<button>{buttonText}</button>
+        {curVisibleState};
+        <button onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     );
   }
