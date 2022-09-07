@@ -1,0 +1,40 @@
+<mxfile host="65bd71144e">
+    <diagram id="ZYcTuAoTEpmBz8UZi12k" name="Page-1">
+        <mxGraphModel dx="836" dy="392" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="App" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="190" y="10" width="400" height="390" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Header" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="40" width="360" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="MerchSiteControl&lt;br&gt;Determine whether StockList or NewPurchaseForm componen is showing" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="210" y="90" width="360" height="290" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="StockList" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="150" width="150" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="NewPurchaseForm" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="400" y="150" width="150" height="210" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="merch" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="245" y="190" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="NewPurchase" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="230" y="320" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="SubmitPurchase" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="415" y="320" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="merch" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="245" y="230" width="120" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="merch" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="245" y="270" width="120" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
