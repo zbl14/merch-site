@@ -5,6 +5,11 @@ import PropTypes from "prop-types";
 const NewPurchaseForm = () => {
   const handleNewPurchaseFormSubmission = (event) => {
     event.preventDefault();
+    props.onNewFormCreation({
+      name: event.target.name.value,
+      amount: event.target.amount.value,
+      id: v4(),
+    });
   };
 
   return (
