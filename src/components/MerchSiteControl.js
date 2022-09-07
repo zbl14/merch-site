@@ -21,10 +21,10 @@ class MerchSiteControl extends React.Component {
     let curVisibleState = null;
     let buttonText = null;
     if (this.state.formVisible) {
-      curVisibleState = <StockList />;
+      curVisibleState = <NewPurchaseForm />;
       buttonText = "Return to Stock List";
     } else {
-      curVisibleState = <NewPurchaseForm />;
+      curVisibleState = <StockList stockList={this.state.mainStockList} />;
       buttonText = "Purchase";
     }
     return (
