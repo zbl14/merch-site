@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 } from "uuid";
 import PropTypes from "prop-types";
+import ReusableForm from "./ReusableForm";
 
 const NewPurchaseForm = (props) => {
   const handleNewPurchaseFormSubmission = (event) => {
@@ -14,11 +15,10 @@ const NewPurchaseForm = (props) => {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleNewPurchaseFormSubmission}>
-        <input type="text" name="name" placeholder="Merch Name" />
-        <input type="number" name="amount" placeholder="Purchase Amount" />
-        <button type="submit">Purchase</button>
-      </form>
+      <ReusableForm
+        formSubmissionHandler={handleNewPurchaseFormSubmission}
+        buttonText="Purchase"
+      />
     </React.Fragment>
   );
 };
