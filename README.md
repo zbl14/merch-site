@@ -1,3 +1,3 @@
 ## App planning
 
-![Image](/componentDiagram.drawio.svg)
+![Image](/src/img/componentDiagram.drawio.svg)
