@@ -2,6 +2,7 @@ import React from "react";
 import StockList from "./StockList";
 import NewPurchaseForm from "./NewPurchaseForm";
 import MerchDetail from "./MerchDetail";
+import EditMerchForm from "./EditMerchForm";
 
 class MerchSiteControl extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class MerchSiteControl extends React.Component {
       formVisible: false,
       mainStockList: [],
       selectedMerch: null,
+      editing: false,
     };
   }
 
@@ -18,6 +20,7 @@ class MerchSiteControl extends React.Component {
       this.setState({
         formVisible: false,
         selectedMerch: null,
+        editing: false,
       });
     } else {
       this.setState((prevState) => ({
@@ -51,14 +54,38 @@ class MerchSiteControl extends React.Component {
     });
   };
 
+  handleEditClick = () => {
+    this.setState({ editing: true });
+  };
+
+  handleEditingMerchInList = (merchToEdit) => {
+    const editedMainStockList = this.state.mainStockList
+      .filter((merch) => merch.id !== this.state.selectedMerch.id)
+      .concat(merchToEdit);
+    this.setState({
+      mainStockList: editedMainStockList,
+      editing: false,
+      selectedMerch: null,
+    });
+  };
+
   render() {
     let curVisibleState = null;
     let buttonText = null;
-    if (this.state.selectedMerch != null) {
+    if (this.state.editing) {
+      curVisibleState = (
+        <EditMerchForm
+          merch={this.state.selectedMerch}
+          onEditMerch={this.handleEditingMerchInList}
+        />
+      );
+      buttonText = "Return to Stock List";
+    } else if (this.state.selectedMerch != null) {
       curVisibleState = (
         <MerchDetail
           merch={this.state.selectedMerch}
           onClickingDelete={this.handleDeletingMerch}
+          onClickingEdit={this.handleEditClick}
         />
       );
       buttonText = "Return to Stock List";
