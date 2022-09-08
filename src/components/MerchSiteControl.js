@@ -1,6 +1,7 @@
 import React from "react";
 import StockList from "./StockList";
 import NewPurchaseForm from "./NewPurchaseForm";
+import MerchDetail from "./MerchDetail";
 
 class MerchSiteControl extends React.Component {
   constructor(props) {
@@ -8,13 +9,21 @@ class MerchSiteControl extends React.Component {
     this.state = {
       formVisible: false,
       mainStockList: [],
+      selectedMerch: null,
     };
   }
 
   handleClick = () => {
-    this.setState((prevState) => ({
-      formVisible: !prevState.formVisible,
-    }));
+    if (this.state.selectedMerch !== null) {
+      this.setState({
+        formVisible: false,
+        selectedMerch: null,
+      });
+    } else {
+      this.setState((prevState) => ({
+        formVisible: !prevState.formVisible,
+      }));
+    }
   };
 
   handleAddingNewMerchToList = (newMerch) => {
@@ -25,16 +34,31 @@ class MerchSiteControl extends React.Component {
     });
   };
 
+  handleChangingSelectedMerch = (id) => {
+    const selectedMerch = this.state.mainStockList.filter(
+      (merch) => merch.id === id
+    )[0];
+    this.setState({ selectedMerch: selectedMerch });
+  };
+
   render() {
     let curVisibleState = null;
     let buttonText = null;
-    if (this.state.formVisible) {
+    if (this.state.selectedMerch != null) {
+      curVisibleState = <MerchDetail merch={this.state.selectedMerch} />;
+      buttonText = "Return to Stock List";
+    } else if (this.state.formVisible) {
       curVisibleState = (
         <NewPurchaseForm onNewFormCreation={this.handleAddingNewMerchToList} />
       );
       buttonText = "Return to Stock List";
     } else {
-      curVisibleState = <StockList stockList={this.state.mainStockList} />;
+      curVisibleState = (
+        <StockList
+          stockList={this.state.mainStockList}
+          onMerchSelection={this.handleChangingSelectedMerch}
+        />
+      );
       buttonText = "Purchase";
     }
     return (

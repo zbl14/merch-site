@@ -5,8 +5,14 @@ import PropTypes from "prop-types";
 const StockList = (props) => {
   return (
     <React.Fragment>
-      {props.stockList.map((merch, index) => (
-        <Merch name={merch.name} amount={merch.amount} key={index} />
+      {props.stockList.map((merch) => (
+        <Merch
+          whenMerchClicked={props.onMerchSelection}
+          name={merch.name}
+          amount={merch.amount}
+          id={merch.id}
+          key={merch.id}
+        />
       ))}
     </React.Fragment>
   );
@@ -14,6 +20,7 @@ const StockList = (props) => {
 
 StockList.propTypes = {
   stockList: PropTypes.array,
+  whenMerchClicked: PropTypes.func,
 };
 
 export default StockList;
