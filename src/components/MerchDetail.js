@@ -2,17 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const MerchDetail = (props) => {
-  const { merch } = props;
+  const { merch, onClickingDelete } = props;
   return (
     <React.Fragment>
       <h1>Detail of {merch.name}</h1>
       <h3>Stock: {merch.amount}</h3>
+      <button onClick={() => onClickingDelete(merch.id)}>Remove Merch</button>
     </React.Fragment>
   );
 };
 
 MerchDetail.propTypes = {
   merch: PropTypes.object,
+  onClickingDelete: PropTypes.func,
 };
 
 export default MerchDetail;
