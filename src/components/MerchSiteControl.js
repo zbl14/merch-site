@@ -105,7 +105,7 @@ class MerchSiteControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {curVisibleState};
+        {curVisibleState}
         <button onClick={this.handleClick}>{buttonText}</button>
       </React.Fragment>
     );
