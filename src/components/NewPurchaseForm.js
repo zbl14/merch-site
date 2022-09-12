@@ -8,7 +8,7 @@ const NewPurchaseForm = (props) => {
     event.preventDefault();
     props.onNewFormCreation({
       name: event.target.name.value,
-      amount: event.target.amount.value,
+      amount: parseInt(event.target.amount.value),
       id: v4(),
     });
   };
