@@ -20,7 +20,7 @@ const StockList = (props) => {
 
 StockList.propTypes = {
   stockList: PropTypes.array,
-  whenMerchClicked: PropTypes.func,
+  onMerchSelection: PropTypes.func,
 };
 
 export default StockList;

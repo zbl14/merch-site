@@ -44,6 +44,29 @@ class MerchSiteControl extends React.Component {
     this.setState({ selectedMerch: selectedMerch });
   };
 
+  handleClickingSellMerch = () => {
+    const selectedMerch = this.state.selectedMerch;
+    if (selectedMerch.amount > 1) {
+      const sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
+      const newSelectedMerch = this.state.mainStockList
+        .filter((merch) => merch.id !== this.state.selectedMerch.id)
+        .concat(sellMerch);
+      this.setState({
+        mainStockList: newSelectedMerch,
+        selectedMerch: sellMerch,
+      });
+    } else {
+      const sellMerch = { ...selectedMerch, amount: "Out of stock" };
+      const newSelectedMerch = this.state.mainStockList
+        .filter((merch) => merch.id !== this.state.selectedMerch.id)
+        .concat(sellMerch);
+      this.setState({
+        mainStockList: newSelectedMerch,
+        selectedMerch: sellMerch,
+      });
+    }
+  };
+
   handleDeletingMerch = (id) => {
     const newMainStockList = this.state.mainStockList.filter(
       (merch) => merch.id !== id
@@ -84,6 +107,7 @@ class MerchSiteControl extends React.Component {
       curVisibleState = (
         <MerchDetail
           merch={this.state.selectedMerch}
+          OnClickingSellMerch={this.handleClickingSellMerch}
           onClickingDelete={this.handleDeletingMerch}
           onClickingEdit={this.handleEditClick}
         />

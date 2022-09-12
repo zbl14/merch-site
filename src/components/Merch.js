@@ -19,7 +19,10 @@ const Merch = (props) => {
 
 Merch.propTypes = {
   name: PropTypes.string.isRequired,
-  amount: PropTypes.number,
+  amount: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.oneOf(["Out of stock"]),
+  ]),
   id: PropTypes.string,
   whenMerchClicked: PropTypes.func,
 };
