@@ -54,4 +54,21 @@ describe("stockList", () => {
       },
     });
   });
+
+  test("should decrease the amount of selected merch by 1", () => {
+    const { name, amount, id } = merchData;
+    action = {
+      type: "SELL_ONE",
+      name: name,
+      amount: amount,
+      id: id,
+    };
+    expect(stockListReducer({}, action)).toEqual({
+      [id]: {
+        name: name,
+        amount: amount - 1,
+        id: id,
+      },
+    });
+  });
 });

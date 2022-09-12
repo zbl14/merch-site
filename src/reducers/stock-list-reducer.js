@@ -16,6 +16,17 @@ const reducer = (state = {}, action) => {
       let newState = { ...state };
       delete newState[id];
       return newState;
+    case "SELL_ONE":
+      return {
+        ...state,
+        ...{
+          [id]: {
+            name: name,
+            amount: amount - 1,
+            id: id,
+          },
+        },
+      };
     default:
       return state;
   }

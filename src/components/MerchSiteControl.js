@@ -50,25 +50,8 @@ class MerchSiteControl extends React.Component {
     this.setState({ selectedMerch: selectedMerch });
   };
 
-  handleClickingSellMerch = () => {
-    const selectedMerch = this.state.selectedMerch;
-    let sellMerch;
-    if (selectedMerch.amount > 1) {
-      sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
-    } else {
-      sellMerch = { ...selectedMerch, amount: "Out of stock" };
-    }
-    const newSelectedMerch = this.state.mainStockList
-      .filter((merch) => merch.id !== this.state.selectedMerch.id)
-      .concat(sellMerch);
-    this.setState({
-      mainStockList: newSelectedMerch,
-      selectedMerch: sellMerch,
-    });
-  };
-
   // handleClickingSellMerch = () => {
-  //   const selectedMerch = this.props.mainStockList[id];
+  //   const selectedMerch = this.state.selectedMerch;
   //   let sellMerch;
   //   if (selectedMerch.amount > 1) {
   //     sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
@@ -83,6 +66,25 @@ class MerchSiteControl extends React.Component {
   //     selectedMerch: sellMerch,
   //   });
   // };
+
+  handleClickingSellMerch = () => {
+    const selectedMerch = this.state.selectedMerch;
+    console.log(selectedMerch);
+    const { dispatch } = this.props;
+    const { id, name, amount } = selectedMerch;
+    const action = {
+      type: "SELL_ONE",
+      name: name,
+      amount: amount,
+      id: id,
+    };
+    dispatch(action);
+    const newSelectedMerch = this.props.mainStockList[id];
+    console.log(newSelectedMerch);
+    this.setState({
+      selectedMerch: newSelectedMerch,
+    });
+  };
 
   handleDeletingMerch = (id) => {
     const { dispatch } = this.props;
