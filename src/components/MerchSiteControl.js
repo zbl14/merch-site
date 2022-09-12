@@ -3,13 +3,14 @@ import StockList from "./StockList";
 import NewPurchaseForm from "./NewPurchaseForm";
 import MerchDetail from "./MerchDetail";
 import EditMerchForm from "./EditMerchForm";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class MerchSiteControl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       formVisible: false,
-      mainStockList: [],
       selectedMerch: null,
       editing: false,
     };
@@ -30,49 +31,67 @@ class MerchSiteControl extends React.Component {
   };
 
   handleAddingNewMerchToList = (newMerch) => {
-    const newMainStockList = this.state.mainStockList.concat(newMerch);
+    const { dispatch } = this.props;
+    const { id, name, amount } = newMerch;
+    const action = {
+      type: "ADD_MERCH",
+      id: id,
+      name: name,
+      amount: amount,
+    };
+    dispatch(action);
     this.setState({
-      mainStockList: newMainStockList,
       formVisible: false,
     });
   };
 
   handleChangingSelectedMerch = (id) => {
-    const selectedMerch = this.state.mainStockList.filter(
-      (merch) => merch.id === id
-    )[0];
+    const selectedMerch = this.props.mainStockList[id];
     this.setState({ selectedMerch: selectedMerch });
   };
 
   handleClickingSellMerch = () => {
     const selectedMerch = this.state.selectedMerch;
+    let sellMerch;
     if (selectedMerch.amount > 1) {
-      const sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
-      const newSelectedMerch = this.state.mainStockList
-        .filter((merch) => merch.id !== this.state.selectedMerch.id)
-        .concat(sellMerch);
-      this.setState({
-        mainStockList: newSelectedMerch,
-        selectedMerch: sellMerch,
-      });
+      sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
     } else {
-      const sellMerch = { ...selectedMerch, amount: "Out of stock" };
-      const newSelectedMerch = this.state.mainStockList
-        .filter((merch) => merch.id !== this.state.selectedMerch.id)
-        .concat(sellMerch);
-      this.setState({
-        mainStockList: newSelectedMerch,
-        selectedMerch: sellMerch,
-      });
+      sellMerch = { ...selectedMerch, amount: "Out of stock" };
     }
+    const newSelectedMerch = this.state.mainStockList
+      .filter((merch) => merch.id !== this.state.selectedMerch.id)
+      .concat(sellMerch);
+    this.setState({
+      mainStockList: newSelectedMerch,
+      selectedMerch: sellMerch,
+    });
   };
 
+  // handleClickingSellMerch = () => {
+  //   const selectedMerch = this.props.mainStockList[id];
+  //   let sellMerch;
+  //   if (selectedMerch.amount > 1) {
+  //     sellMerch = { ...selectedMerch, amount: selectedMerch.amount - 1 };
+  //   } else {
+  //     sellMerch = { ...selectedMerch, amount: "Out of stock" };
+  //   }
+  //   const newSelectedMerch = this.state.mainStockList
+  //     .filter((merch) => merch.id !== this.state.selectedMerch.id)
+  //     .concat(sellMerch);
+  //   this.setState({
+  //     mainStockList: newSelectedMerch,
+  //     selectedMerch: sellMerch,
+  //   });
+  // };
+
   handleDeletingMerch = (id) => {
-    const newMainStockList = this.state.mainStockList.filter(
-      (merch) => merch.id !== id
-    );
+    const { dispatch } = this.props;
+    const action = {
+      type: "DELETE_MERCH",
+      id: id,
+    };
+    dispatch(action);
     this.setState({
-      mainStockList: newMainStockList,
       selectedMerch: null,
     });
   };
@@ -82,11 +101,16 @@ class MerchSiteControl extends React.Component {
   };
 
   handleEditingMerchInList = (merchToEdit) => {
-    const editedMainStockList = this.state.mainStockList
-      .filter((merch) => merch.id !== this.state.selectedMerch.id)
-      .concat(merchToEdit);
+    const { dispatch } = this.props;
+    const { id, name, amount } = merchToEdit;
+    const action = {
+      type: "ADD_MERCH",
+      id: id,
+      name: name,
+      amount: amount,
+    };
+    dispatch(action);
     this.setState({
-      mainStockList: editedMainStockList,
       editing: false,
       selectedMerch: null,
     });
@@ -121,7 +145,7 @@ class MerchSiteControl extends React.Component {
     } else {
       curVisibleState = (
         <StockList
-          stockList={this.state.mainStockList}
+          stockList={this.props.mainStockList}
           onMerchSelection={this.handleChangingSelectedMerch}
         />
       );
@@ -135,5 +159,17 @@ class MerchSiteControl extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    mainStockList: state,
+  };
+};
+
+MerchSiteControl = connect(mapStateToProps)(MerchSiteControl);
+
+MerchSiteControl.propTypes = {
+  mainStockList: PropTypes.object,
+};
 
 export default MerchSiteControl;
