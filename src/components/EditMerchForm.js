@@ -8,7 +8,7 @@ const EditMerchForm = (props) => {
     event.preventDefault();
     props.onEditMerch({
       name: event.target.name.value,
-      amount: event.target.amount.value,
+      amount: parseInt(event.target.amount.value),
       id: merch.id,
     });
   };
